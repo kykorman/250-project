@@ -9,6 +9,7 @@ int validInput(char word[30]);
 int rotorNotUnique(int rotor[255],int spot);
 void print_rotor(int rotor[255]);
 int findRotorSpot(int val,int rotor[255]);
+int mod(int num);
 int main(){
 
 	int seed,r1Pos,r2Pos,r3Pos,r1[255],r2[255],r3[255];
@@ -82,7 +83,6 @@ int main(){
 		res1=r2[(res0+r2Pos)%255];
 		res2=r3[(res1+r3Pos)%255];
 
-		cout<<res0<<" "<<res1<<" "<<res2<<endl;
 //		msgEncrypted[i]=res2;
 		r1Pos++;
 //		cout<<(int)msgEncrypted[i]<<endl;
@@ -106,10 +106,11 @@ int main(){
 					r3Pos=0;
 			}
 		}
-		msgUnencrypted[i]=(findRotorSpot((findRotorSpot((findRotorSpot(msgEncrypted[i],r3)-r3Pos+255)%255,r2)-r2Pos+255)%255,r1)-r1Pos+255)%255;
+		msgUnencrypted[i]=mod(findRotorSpot(mod(findRotorSpot(mod(findRotorSpot(msgEncrypted[i],r3)-r3Pos),r2)-r2Pos),r1)-r1Pos);
 		r1Pos++;
 			
 	}
+	cout<<"Unencrypted message \n\n\n";
 	for(int i=0;i<msg.length();i++)
 		cout<<msgUnencrypted[i];
 	cout<<endl;
@@ -147,6 +148,9 @@ int findRotorSpot(int val,int rotor[255]){
 		if(rotor[i]==val)
 			return i;
 	}
-	cout<<val<<" Failed\n";
 return -1;}
-
+int mod(int num){
+	if(num<=0)
+		return num+255;
+	return num;
+}
