@@ -192,7 +192,6 @@ void sendMain(int r1[],int r2[],int r3[],int r1Pos,int r2Pos,int r3Pos){
 
 	cout<<"Enter port number to send on (1-65535): ";
 	cin>>portno;
-	cout<<portno<<endl;
 	cout<<"Enter host to send to: ";
 
 	char jnk2;
@@ -202,6 +201,7 @@ void sendMain(int r1[],int r2[],int r3[],int r1Pos,int r2Pos,int r3Pos){
 
 	encode(r1,r2,r3,r1Pos,r2Pos,r3Pos,msg,msgEncrypted);
 	msgFile<<msgEncrypted;
+	msgFile.close();
 	string cmd="./c.out ";
 
 	cmd+=serveraddr;
@@ -221,14 +221,14 @@ void receiveMain(int r1[],int r2[],int r3[],int r1Pos,int r2Pos,int r3Pos){
 	unsigned char encrypted[1473]="",unencrypted[1473]="";
 	int portno;
 	
-	system("gcc server.cpp -o b.out");
+	system("gcc server.c -o b.out");
 	
 	cout<<"Enter port number to listen on (1-65535): ";
 	cin>>portno;
 
 	string cmd="./b.out ";
 	cmd+=portno;
-
+	cmd+='\n';
 	char newcmd[cmd.length()+1];
 	strcpy(newcmd,cmd.c_str());
 
