@@ -2,7 +2,7 @@
 #include <string>
 #include <random>
 #include <fstream>
-
+#include <cstring>
 using namespace std;
 unsigned char *fgetus(unsigned char *dst, int max, FILE *fp);
 //void send(unsigned char msg[]);
@@ -176,7 +176,7 @@ int strlen(unsigned char msg[]){
 return len;}
 
 void sendMain(int r1[],int r2[],int r3[],int r1Pos,int r2Pos,int r3Pos){
-	system("gcc client.cpp -o c.out");
+	system("gcc client.c -o c.out");
 
 	int portno;
 
@@ -207,7 +207,8 @@ void sendMain(int r1[],int r2[],int r3[],int r1Pos,int r2Pos,int r3Pos){
 	cmd+=serveraddr;
 	cmd+=" ";
 	cmd+=to_string(portno);
-	cout<<cmd<<endl;
+	cmd+='\n';
+cout<<cmd;
 	char newcmd[cmd.length()+1];
 	strcpy(newcmd,cmd.c_str());
 

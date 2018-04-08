@@ -1,4 +1,3 @@
-#include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -7,9 +6,8 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h> 
-using namespace std; 
 
-int strlen(unsigned char msg[]){
+int strlen22(unsigned char msg[]){
 	int len=0;
 
 	while(msg[len]!='\0')
@@ -75,11 +73,11 @@ int main(int argc, char *argv[])
         error("ERROR connecting");
     bzero(buffer,1473);
     fgetus(buffer,1472,messageFile);
-    n = write(sockfd,buffer,strlen(buffer));
+    n = write(sockfd,buffer,strlen22(buffer));
     if (n < 0) 
          error("ERROR writing to socket");
-    bzero(buffer,256);
-    n = read(sockfd,buffer,255);
+    bzero(buffer,1473);
+    n = read(sockfd,buffer,1472);
     if (n < 0) 
          error("ERROR reading from socket");
     printf("%s\n",buffer);
