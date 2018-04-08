@@ -7,8 +7,16 @@
 #include <sys/types.h> 
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include <fstream> 
-using namespace std;
+
+
+int strlen22(unsigned char msg[]){
+	int len=0;
+
+	while(msg[len]!='\0')
+		len++;
+
+return len;}
+
 void error(const char *msg)
 {
     printf("%s\n",msg);
@@ -17,11 +25,11 @@ void error(const char *msg)
  
 int main(int argc, char *argv[])
 {
-	ofstream out;
-	out.open("out");
+	FILE *out=fopen("out","w");
+
      int sockfd, newsockfd, portno;
      socklen_t clilen;
-     unsigned char buffer[1473];
+     unsigned char buffer[1473]="";
      struct sockaddr_in serv_addr, cli_addr;
      int n;
      if (argc < 2) {
@@ -49,10 +57,14 @@ int main(int argc, char *argv[])
      bzero(buffer,1473);
      n = read(newsockfd,buffer,1472);
      if (n < 0) error("ERROR reading from socket");
-	out<<buffer<<endl;
+
+	for(int i=0;i<strlen22(buffer);i++){
+		fprintf(out,"%c",buffer[i]);
+//		printf("%c",buffer[i]);
+	}
+//	out<<buffer<<endl;
      close(newsockfd);
      close(sockfd);
-	out.close();
 //	system("rm out");
      return 0; 
 }

@@ -221,7 +221,7 @@ void receiveMain(int r1[],int r2[],int r3[],int r1Pos,int r2Pos,int r3Pos){
 	unsigned char encrypted[1473]="",unencrypted[1473]="";
 	int portno;
 	
-	system("g++ server.cpp -o b.out");
+	system("gcc server.cpp -o b.out");
 	
 	cout<<"Enter port number to listen on (1-65535): ";
 	cin>>portno;
