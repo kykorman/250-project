@@ -216,7 +216,7 @@ void sendMain(int r1[],int r2[],int r3[],int r1Pos,int r2Pos,int r3Pos){
 
 	system(newcmd);
 	cout<<"Sent\n";
-//	system("rm c.out;rm tmpmsg");
+	system("rm c.out;rm tmpmsg");
 }
 
 void receiveMain(int r1[],int r2[],int r3[],int r1Pos,int r2Pos,int r3Pos){
