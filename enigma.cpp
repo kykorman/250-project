@@ -62,25 +62,28 @@ int main(){
 	int encodeOrNah=validInput(thing4);
 
 	system("clear");
-	if(encodeOrNah)
+	if(encodeOrNah){
 		sendMain(r1,r2,r3,r1Pos,r2Pos,r3Pos);
+
+		system("gcc client.c -o c.out");
 /*
 */
-	else
+	}else{
 
+		system("gcc server.c -o b.out");
 		receiveMain(r1,r2,r3,r1Pos,r2Pos,r3Pos);
 /*
 		unsigned char msgUnencrypted[strlen(msgEncrypted)+1];
 		decode(r1,r2,r3,r1Pos,r2Pos,r3Pos,msgEncrypted,msgUnencrypted);
 */
-	
+	}
 //cout<<(string)msgUnencrypted<<endl;
 return 0;}
 void decode(int r1[],int r2[], int r3[], int r1Pos,int r2Pos, int r3Pos, unsigned char msgEncrypted[], unsigned char msgUnencrypted[]){
-
+	cout<<"Encrypted message\n";
 	for(int k=0;k<strlen(msgEncrypted);k++)
 		printf("%c",msgEncrypted[k]);
-
+	cout<<endl;
 //	cout<<r1Pos<<" "<<r2Pos<<" "<<r3Pos<<endl;
 	for(int i=0;i<strlen(msgEncrypted);i++){
 		if(r1Pos>=255){
@@ -176,7 +179,6 @@ int strlen(unsigned char msg[]){
 return len;}
 
 void sendMain(int r1[],int r2[],int r3[],int r1Pos,int r2Pos,int r3Pos){
-	system("gcc client.c -o c.out");
 
 	int portno;
 
@@ -208,7 +210,7 @@ void sendMain(int r1[],int r2[],int r3[],int r1Pos,int r2Pos,int r3Pos){
 	cmd+=" ";
 	cmd+=to_string(portno);
 	cmd+='\n';
-cout<<cmd;
+	
 	char newcmd[cmd.length()+1];
 	strcpy(newcmd,cmd.c_str());
 
@@ -221,13 +223,12 @@ void receiveMain(int r1[],int r2[],int r3[],int r1Pos,int r2Pos,int r3Pos){
 	unsigned char encrypted[1473]="",unencrypted[1473]="";
 	int portno;
 	
-	system("gcc server.c -o b.out");
 	
 	cout<<"Enter port number to listen on (1-65535): ";
 	cin>>portno;
 
 	string cmd="./b.out ";
-	cmd+=portno;
+	cmd+=to_string(portno);
 	cmd+='\n';
 	char newcmd[cmd.length()+1];
 	strcpy(newcmd,cmd.c_str());
@@ -242,15 +243,15 @@ void receiveMain(int r1[],int r2[],int r3[],int r1Pos,int r2Pos,int r3Pos){
 	for(int i=0;i<strlen(unencrypted);i++)
 		printf("%c",unencrypted[i]);
 	cout<<endl;	
-	cout<<"1 to receive with same parameters, 0 to exit";
+	cout<<"1 to receive again, 0 to exit: ";
 	int tmp;
 	cin>>tmp;
 
-	if(tmp)
+	if(tmp==1)
 		receiveMain(r1,r2,r3,r1Pos,r2Pos,r3Pos);
 	else{
-//		system("rm b.out");
-//		system("rm out");
+		system("rm b.out");
+		system("rm out");
 		exit(0);
 	}
 }
