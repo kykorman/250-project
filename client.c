@@ -27,8 +27,8 @@ fgetus(unsigned char *dst, int max, FILE *fp)
 		if ((c = fgetc (fp)) == EOF)
 			break;
 		*p++ = c;
-		if (c == '\n')
-			break;
+//		if (c == '\n')
+//			break;
 	}
 	*p = 0;
 	if (p == dst || c == EOF)
@@ -80,7 +80,6 @@ int main(int argc, char *argv[])
     n = read(sockfd,buffer,1472);
     if (n < 0) 
          error("ERROR reading from socket");
-    printf("%s\n",buffer);
     close(sockfd);
     return 0;
 }

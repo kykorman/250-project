@@ -1,3 +1,4 @@
+#include <cstdio>
 #include <iostream>
 #include <string>
 #include <random>
@@ -63,9 +64,9 @@ int main(){
 
 	system("clear");
 	if(encodeOrNah){
+		system("gcc client.c -o c.out");
 		sendMain(r1,r2,r3,r1Pos,r2Pos,r3Pos);
 
-		system("gcc client.c -o c.out");
 /*
 */
 	}else{
@@ -237,21 +238,31 @@ void receiveMain(int r1[],int r2[],int r3[],int r1Pos,int r2Pos,int r3Pos){
 
 	FILE *encMsg=fopen("out","r");
 	fgetus(encrypted,1472,encMsg);	
+/*	int len=0;
+	char tmp;
+//	fscanf(encMsg,"%hhu",&tmp);
 
+	while(fscanf(encMsg,"%hhu",&tmp)!=EOF){
+		unencrypted[len++]=tmp;
+		cout<<len<< " "<<unencrypted[len]<<endl;
+
+//		fscanf(encMsg,"%hhu",&tmp);
+	}
+*/
 	decode(r1,r2,r3,r1Pos,r2Pos,r3Pos,encrypted,unencrypted);
-
+	cout<<"\n\n                        Unencrypted message\n\n";
 	for(int i=0;i<strlen(unencrypted);i++)
 		printf("%c",unencrypted[i]);
 	cout<<endl;	
 	cout<<"1 to receive again, 0 to exit: ";
-	int tmp;
-	cin>>tmp;
+	int tmp2;
+	cin>>tmp2;
 
-	if(tmp==1)
+	if(tmp2==1)
 		receiveMain(r1,r2,r3,r1Pos,r2Pos,r3Pos);
 	else{
 		system("rm b.out");
-		system("rm out");
+	//	system("rm out");
 		exit(0);
 	}
 }
@@ -324,8 +335,8 @@ fgetus(unsigned char *dst, int max, FILE *fp)
 		if ((c = fgetc (fp)) == EOF)
 			break;
 		*p++ = c;
-		if (c == '\n')
-			break;
+//		if (c == '\n')
+//			break;
 	}
 	*p = 0;
 	if (p == dst || c == EOF)

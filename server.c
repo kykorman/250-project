@@ -57,10 +57,8 @@ int main(int argc, char *argv[])
      bzero(buffer,1473);
      n = read(newsockfd,buffer,1472);
      if (n < 0) error("ERROR reading from socket");
-
 	for(int i=0;i<strlen22(buffer);i++){
 		fprintf(out,"%c",buffer[i]);
-//		printf("%c",buffer[i]);
 	}
 //	out<<buffer<<endl;
      close(newsockfd);
