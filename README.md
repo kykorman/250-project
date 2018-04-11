@@ -4,7 +4,7 @@
 2. `g++ enigma.cpp -std=c++11`
 3. `./a.out`
 
-Both parties must have the same seed and rotor positions entered so that proper decoding will take place. The IP address must be known as well (use nslookup if you only have a domain name). Port must be agreed upon as well.
+Both parties must have the same seed and rotor positions entered so that proper decoding will take place. The IP address must be known as well (use nslookup if you only have a domain name). Port must be agreed upon.
 ## Why
 It sounded like a fun thing to do for a project, so I did it.
 ## How
