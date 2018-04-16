@@ -16,23 +16,36 @@ void decode(int r1[],int r2[], int r3[], int r1Pos,int r2Pos, int r3Pos, unsigne
 
 int strlen(unsigned char msg[]);
 
-int validInput(char word[60]);
+long long validInput(char word[60]);
 int rotorNotUnique(int rotor[255],int spot);
 void print_rotor(int rotor[255]);
 int findRotorSpot(int val,int rotor[255]);
 int mod(int num);
 
 int main(){
-
-	int seed,r1Pos,r2Pos,r3Pos,r1[255],r2[255],r3[255];
+	
+	long long seed,r1Pos,r2Pos,r3Pos;
+	int r1[255],r2[255],r3[255];
 	char thing0[30]="Enter seed value",thing1[30]="Enter Rotor 1 position",thing2[30]="Enter Rotor 2 position",thing3[30]="Enter Rotor 3 position";
 
-	//Ensure numbers > 0. If rotorPosition>255, it gets kicked down anyway.
+	//Ensure numbers > 0.
 	seed=validInput(thing0);
 	r1Pos=validInput(thing1);
+	while(r1Pos>255){
+		cout<<"Rotor position must be less than 255.\n";
+		r1Pos=validInput(thing1);
+	}
 	r2Pos=validInput(thing2);
+	while(r2Pos>255){
+		cout<<"Rotor position must be less than 255.\n";
+		r2Pos=validInput(thing2);
+	}
 	r3Pos=validInput(thing3);
 
+	while(r3Pos>255){
+		cout<<"Rotor position must be less than 255.\n";
+		r3Pos=validInput(thing3);
+	}
     mt19937 generator(seed);
     uniform_int_distribution<int> gen_rotor(1,255);
 
@@ -135,8 +148,8 @@ void encode(int r1[],int r2[], int r3[], int r1Pos,int r2Pos, int r3Pos,string m
 
 } 
 
-int validInput(char word[60]){
-	int val;
+long long validInput(char word[60]){
+	long long val;
 	cout<<word<<endl;
 	cin>>val;
 
@@ -237,7 +250,7 @@ void receiveMain(int r1[],int r2[],int r3[],int r1Pos,int r2Pos,int r3Pos){
 	system(newcmd);
 
 	FILE *encMsg=fopen("out","r");
-	fgetus(encrypted,1472,encMsg);	
+	fgetus(encrypted,1473,encMsg);	
 
 	decode(r1,r2,r3,r1Pos,r2Pos,r3Pos,encrypted,unencrypted);
 	cout<<"\n\n                        Unencrypted message\n\n";
