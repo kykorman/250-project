@@ -1,8 +1,9 @@
 # 250-project/Enigma code messaging service
 ## To Use
 1. Use two like-systems (macOS to macOS using xcode, or linux-linux (have not tested many distros, but stuff like kali to mint works)
-2. `g++ enigma.cpp -std=c++11`
-3. `./a.out`
+2. `git clone https://github.com/kykorman/250-project.git`
+3. `g++ enigma.cpp -std=c++11`
+4. `./a.out`
 
 Both parties must have the same seed and rotor positions entered so that proper decoding will take place. The IP address must be known as well (use nslookup if you only have a domain name). Port must be agreed upon.
 ## Why
